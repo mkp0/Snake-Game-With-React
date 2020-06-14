@@ -6,6 +6,7 @@
 
 .container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -14,8 +15,8 @@
 
 .gameArea{
   position: relative;
-  width: 20rem;
-  height: 20rem;
+  width: 15rem;
+  height: 15rem;
   background-color: rgb(177, 140, 140);
   border : 5px solid black;
 }

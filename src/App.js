@@ -8,7 +8,7 @@ import Food from './Food.js'
 
 let getRandomCordinates = () => {
   let min = 1;
-  let max = 19; 
+  let max = 14; 
 
   let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
 	let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
@@ -21,6 +21,7 @@ function App() {
   const [speed, setSpeed] = useState(70);
   let [foodDot , setFoodDot] = useState(getRandomCordinates())
   let [snakeDots,setSnakeDots] = useState([[0,0],[0.5,0]])
+  let [score , setScore] = useState(0)
   
 
   useEffect(() => {
@@ -95,14 +96,15 @@ function App() {
   
 
   function onGameOver() {
-    setSnakeDots([[0, 0], [0.5,0]]);
+	setSnakeDots([[0, 0], [0.5,0]]);
+	setScore(0)
     setFoodDot(getRandomCordinates())
 		setDirection('RIGHT');
 	}
 
 	function checkIfOutOfBorders() {
 		let head = snakeDots[snakeDots.length - 1];
-		if (head[0] === 20 || head[1] === 20 || head[0] < 0 || head[1] < 0) {
+		if (head[0] === 15 || head[1] === 15 || head[0] < 0 || head[1] < 0) {
 			onGameOver();
 		}
   }
@@ -121,12 +123,14 @@ function App() {
 
 	function enlargeSnake() {
 		let newSnake = [snakeDots[snakeDots.length - 1], ...snakeDots];
+		setScore(score+10)
 		setSnakeDots(newSnake);
 	}
 
 	
   return (
     <div className='container'>
+		<h1>Score : {score}</h1>
       <div className='gameArea'>     
       <Snake snakeDots={snakeDots} />
       <Food Dot={foodDot} />
